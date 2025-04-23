@@ -50,12 +50,18 @@
   
                   <v-card-text>
                     <div class="text-h6 font-weight-bold mb-1 white--text">{{ character.name }}</div>
-                    <div class="grey--text text-caption mb-2">{{ character.status }} - {{ character.species }}</div>
+                    <div class="grey--text text-caption mb-2 d-flex align-center">
+                    <span
+                        class="status-dot mr-2"
+                        :style="{ backgroundColor: getStatusColor(character.status) }"
+                    ></span>
+                    {{ character.status }} - {{ character.species }}
+                    </div>
   
                     <div class="text-subtitle-2 text-grey">Last known location:</div>
                     <div class="white--text mb-2">{{ character.location.name }}</div>
   
-                    <div class="text-subtitle-2 text-grey">First seen in:</div>
+                    <div class="text-subtitle-2 text-grey">Origin:</div>
                     <div class="white--text">{{ character.origin.name }}</div>
                   </v-card-text>
                 </v-card>
@@ -140,5 +146,12 @@
   .text-grey {
     color: #bbb;
   }
+  .status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
   </style>
   
