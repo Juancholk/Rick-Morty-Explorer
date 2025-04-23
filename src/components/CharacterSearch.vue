@@ -7,8 +7,8 @@
   
             <v-text-field
               v-model="searchQuery"
-              label="Buscar personaje"
-              placeholder="Ej: Rick Sanchez"
+              label="Search character"
+              placeholder="Example: Rick Sanchez"
               outlined
               clearable
               @keyup.enter="searchCharacters"
