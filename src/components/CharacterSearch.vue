@@ -31,7 +31,10 @@
             >
               {{ error }}
             </v-alert>
-  
+            <SearchHistory 
+            :history="searchHistory" 
+            @search="searchFromHistory"
+            />
             <v-row v-if="characters.length > 0" class="mt-4">
               <v-col
                 v-for="character in characters"
@@ -71,11 +74,13 @@
         </v-col>
       </v-row>
     </v-container>
+
   </template>
   
   <script setup>
   import { ref } from 'vue'
   import axios from 'axios'
+  import SearchHistory from './SearchHistory.vue'
   
   const searchQuery = ref('')
   const characters = ref([])
@@ -105,12 +110,34 @@
         `https://rickandmortyapi.com/api/character/?name=${searchQuery.value}`
       )
       characters.value = response.data.results
+      if (characters.value.length > 0) {
+      addToHistory(searchQuery.value)
+    }
     } catch (err) {
       error.value = 'Personaje no encontrado'
     } finally {
       loading.value = false
     }
   }
+
+
+//Historial
+  const searchHistory = ref([])
+
+  const addToHistory = (query) => {
+  searchHistory.value = [query, ...searchHistory.value.filter(q => q !== query)].slice(0, 3)
+  localStorage.setItem('rickMortyHistory', JSON.stringify(searchHistory.value))
+}
+
+  const searchFromHistory = (query) => {
+   searchQuery.value = query
+  searchCharacters()
+ }
+
+  const clearHistory = () => {
+    searchHistory.value = []
+  }
+  
   </script>
   
   <style scoped>
