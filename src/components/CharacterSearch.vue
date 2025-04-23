@@ -1,10 +1,10 @@
 <template>
     <v-container>
       <v-row justify="center">
-        <v-col cols="12" md="6">
-          <v-card class="pa-4">
-            <v-card-title class="text-h4 mb-4">Rick & Morty Explorer</v-card-title>
-
+        <v-col cols="12" md="8">
+          <v-card class="pa-4 elevation-4">
+            <v-card-title class="text-h4 mb-4 white--text">Rick & Morty Explorer</v-card-title>
+  
             <v-text-field
               v-model="searchQuery"
               label="Buscar personaje"
@@ -12,6 +12,7 @@
               outlined
               clearable
               @keyup.enter="searchCharacters"
+              class="mb-4"
             ></v-text-field>
             
             <v-btn 
@@ -23,7 +24,6 @@
               Buscar
             </v-btn>
   
-            <!-- Mensaje de error -->
             <v-alert
               v-if="error"
               type="error"
@@ -32,22 +32,35 @@
               {{ error }}
             </v-alert>
   
-            <!-- Resultados -->
-            <v-list v-if="characters.length > 0" class="mt-4">
-              <v-list-item
+            <v-row v-if="characters.length > 0" class="mt-4">
+              <v-col
                 v-for="character in characters"
                 :key="character.id"
+                cols="12"
+                sm="6"
+                md="6"
               >
-                <v-avatar size="80" class="mr-4">
-                  <v-img :src="character.image" :alt="character.name"></v-img>
-                </v-avatar>
-                <v-list-item-content>
-                  <v-list-item-title>{{ character.name }}</v-list-item-title>
-                  <v-list-item-subtitle>Status: {{ character.status }}</v-list-item-subtitle>
-                  <v-list-item-subtitle>Especie: {{ character.species }}</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
+                <v-card class="character-card">
+                  <v-img
+                    :src="character.image"
+                    height="200"
+                    cover
+                    class="character-image"
+                  ></v-img>
+  
+                  <v-card-text>
+                    <div class="text-h6 font-weight-bold mb-1 white--text">{{ character.name }}</div>
+                    <div class="grey--text text-caption mb-2">{{ character.status }} - {{ character.species }}</div>
+  
+                    <div class="text-subtitle-2 text-grey">Last known location:</div>
+                    <div class="white--text mb-2">{{ character.location.name }}</div>
+  
+                    <div class="text-subtitle-2 text-grey">First seen in:</div>
+                    <div class="white--text">{{ character.origin.name }}</div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
           </v-card>
         </v-col>
       </v-row>
@@ -62,6 +75,14 @@
   const characters = ref([])
   const loading = ref(false)
   const error = ref('')
+  
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Alive': return 'green'
+      case 'Dead': return 'red'
+      default: return 'grey'
+    }
+  }
   
   const searchCharacters = async () => {
     if (!searchQuery.value.trim()) {
@@ -85,3 +106,39 @@
     }
   }
   </script>
+  
+  <style scoped>
+  .v-container {
+    background-color: #1e1f26;
+    min-height: 100vh;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  
+  .v-card {
+    background-color: #2d2f36 !important;
+    color: #fff;
+    border-radius: 16px;
+  }
+  
+  .character-card {
+    background-color: #383a42;
+    transition: transform 0.3s ease;
+    color: #fff;
+    border-radius: 16px;
+  }
+  
+  .character-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+  
+  .character-image {
+    border-bottom: 1px solid #444;
+  }
+  
+  .text-grey {
+    color: #bbb;
+  }
+  </style>
+  
