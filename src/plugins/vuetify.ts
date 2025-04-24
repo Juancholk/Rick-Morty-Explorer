@@ -14,7 +14,7 @@ export default createVuetify({
     sets: { mdi }
   },
   theme: {
-    defaultTheme: 'dark'
+    defaultTheme: 'light',
   }
 })
 export { default as vuetify } from './vuetify'
