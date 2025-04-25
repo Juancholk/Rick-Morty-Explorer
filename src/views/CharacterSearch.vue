@@ -149,7 +149,7 @@ const addToHistory = (character: Character) => {
   searchHistory.value = [
     character,
     ...searchHistory.value.filter(c => c.id !== character.id)
-  ].slice(0, 5)
+  ].slice(0, 3)
 
   localStorage.setItem('rickMortyHistory', JSON.stringify(searchHistory.value))
 }
