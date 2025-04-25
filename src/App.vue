@@ -1,9 +1,18 @@
 <template>
   <v-app>
-    <CharacterSearch />
+    <v-main>
+      <router-view />
+    </v-main>
   </v-app>
 </template>
 
 <script setup>
-import CharacterSearch from './components/CharacterSearch.vue'
+import { onMounted } from 'vue'
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+
+onMounted(() => {
+  theme.global.name.value = 'customTheme'
+})
 </script>
