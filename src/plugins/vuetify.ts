@@ -1,20 +1,28 @@
-
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import { aliases, mdi } from 'vuetify/iconsets/mdi'
-import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+
+const customTheme = {
+  dark: false,
+  colors: {
+    primary: '#42b983',
+    secondary: '#2c3e50',
+    accent: '#82B1FF',
+    error: '#FF5252',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FFC107'
+  }
+}
 
 export default createVuetify({
   components,
   directives,
-  icons: {
-    defaultSet: 'mdi',
-    aliases,
-    sets: { mdi }
-  },
   theme: {
-    defaultTheme: 'light',
-  }
+    defaultTheme: 'customTheme',
+    themes: {
+      customTheme
+    }
+  }
 })
-export { default as vuetify } from './vuetify'
