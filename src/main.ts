@@ -1,12 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-
-// Importaciones de plugins
 import vuetify from './plugins/vuetify'
+import router from './router'
 
-
-// Crea y monta la app
 const app = createApp(App)
 
 app.use(vuetify)
+app.use(router)
+
 app.mount('#app')
