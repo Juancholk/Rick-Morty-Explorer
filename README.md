@@ -34,12 +34,16 @@ Aplicación web desarrollada con Vue 3, Vuetify 3 y TypeScript que permite explo
 ```bash
 git clone https://github.com/tu-usuario/rick-and-morty-explorer.git
 cd rick-and-morty-explorer
+```
 
-- Clonar el repositorio:
-  git clone https://github.com/tu-usuario/rick-and-morty-explorer.git
-  cd rick-and-morty-explorer
-- Instalar dependencias:
+2. Instalar dependencias:
+
+```bash
   npm install
-- Iniciar servidor:
+```
+
+2. Iniciar servidor:
+
+```bash
   npm run dev
 ```
